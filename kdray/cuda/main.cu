@@ -4,6 +4,7 @@
 #include "monte_carlo.h"
 #include "interaction.h"
 #include "integrator.h"
+#include <optix_device.h>
 
 extern "C" __constant__ kdray::RayTraceLaunchParams Params;
 
@@ -136,8 +137,8 @@ extern "C" __global__ void __closesthit__main()
     }
     interaction->material.roughness = sqr(interaction->material.roughness);
     float aspect = sqrtf(1.0f - interaction->material.anisotropic * 0.9f);
-    interaction->material.alphax = max(0.001f, interaction->material.roughness / aspect);
-    interaction->material.alphay = max(0.001f, interaction->material.roughness * aspect);
+    interaction->material.alphax = fmaxf(0.001f, interaction->material.roughness / aspect);
+    interaction->material.alphay = fmaxf(0.001f, interaction->material.roughness * aspect);
     interaction->material.eta = dot(interaction->wo, interaction->geomNormal) > 0.0f ? 1.0f / hitGroupData.material->ior : hitGroupData.material->ior;
     interaction->material.clearcoatRoughness = sqr(interaction->material.clearcoatRoughness);
 }

@@ -1,5 +1,6 @@
-﻿find_package(CUDA 11 REQUIRED)
+﻿find_package(CUDA REQUIRED)
 message("find cuda include dir: " ${CUDA_INCLUDE_DIRS})
+include_directories(${CUDA_INCLUDE_DIRS})
 
 find_path(
     OPTIX_INCLUDE_DIRS
