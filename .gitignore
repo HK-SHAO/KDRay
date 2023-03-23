@@ -1,3 +1,14 @@
 out
 .vs
 scenes
+*.vcxproj.*
+*.vcxproj
+*.sln
+CMakeFiles/
+*.cmake
+CMakeCache.txt
+x64/
+*.dir
+Debug/
+Release/
+*generated_*.cu.*
